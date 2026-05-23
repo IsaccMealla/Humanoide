@@ -1,0 +1,73 @@
+# =========================
+# GENERAL
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# ENV FILES
+# =========================
+.env
+.env.local
+.env.production
+
+# =========================
+# PYTHON
+# =========================
+backend/venv/
+backend/__pycache__/
+backend/.pytest_cache/
+backend/*.pyc
+
+# =========================
+# FLUTTER / DART
+# =========================
+frontend/.dart_tool/
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/.packages
+frontend/build/
+frontend/.idea/
+frontend/.vscode/
+frontend/pubspec.lock
+
+# =========================
+# ANDROID
+# =========================
+frontend/android/.gradle/
+frontend/android/app/debug
+frontend/android/app/profile
+frontend/android/app/release
+
+# =========================
+# IOS
+# =========================
+frontend/ios/Pods/
+frontend/ios/.symlinks/
+frontend/ios/Flutter/
+
+# =========================
+# LOGS
+# =========================
+*.log
+
+# =========================
+# VS CODE
+# =========================
+.vscode/
+
+# =========================
+# NODE
+# =========================
+node_modules/
+
+# =========================
+# EMBEDDED / PLATFORMIO
+# =========================
+embedded/.pio/
+embedded/.vscode/
+
+# =========================
+# OLD FRONTEND
+# =========================
+frontend_old/
