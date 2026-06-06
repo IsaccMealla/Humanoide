@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../shared/data/supabase_service.dart';
 import '../../../../shared/models/pedido_model.dart';
+import '../../../robot/presentation/screens/robot_screen.dart' as manual_robot;
 
 /// Pantalla del estado del robot con indicador visual de balanza
 /// y progreso detallado del pedido activo.
@@ -121,6 +122,33 @@ class _RobotScreenState extends State<RobotScreen> {
 
                         // ── Timeline vertical detallado ──
                         _buildDetailedTimeline(context, pedido),
+
+                        const SizedBox(height: 30),
+
+                        // ── Botón para ir a Control Manual ──
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const manual_robot.RobotScreen(),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.settings_remote, color: AppColors.espresso),
+                            label: const Text(
+                              "ABRIR CONTROL MANUAL ESP32",
+                              style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.espresso),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.caramel,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                            ),
+                          ),
+                        ),
 
                         const SizedBox(height: 100),
                       ],
