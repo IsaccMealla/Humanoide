@@ -6,6 +6,7 @@ import '../../../../core/theme/app_colors.dart';
 import 'menu_screen.dart';
 import 'pedidos_screen.dart';
 import 'robot_screen.dart';
+import '../../../robot/presentation/screens/chatbot_screen.dart';
 
 /// Shell principal con NavigationBar de 3 pestañas
 /// y botón de emergencia persistente.
@@ -85,23 +86,56 @@ class _AppShellState extends State<AppShell> {
               height: 68,
               destinations: [
                 NavigationDestination(
-                  icon: Icon(Icons.coffee_outlined,
-                      color: _currentIndex == 0 ? AppColors.caramel : AppColors.muted),
-                  selectedIcon: const Icon(Icons.coffee, color: AppColors.caramel),
+                  icon: Icon(
+                    Icons.coffee_outlined,
+                    color: _currentIndex == 0
+                        ? AppColors.caramel
+                        : AppColors.muted,
+                  ),
+                  selectedIcon: const Icon(
+                    Icons.coffee,
+                    color: AppColors.caramel,
+                  ),
                   label: 'Menú',
                 ),
                 NavigationDestination(
-                  icon: Icon(Icons.receipt_long_outlined,
-                      color: _currentIndex == 1 ? AppColors.caramel : AppColors.muted),
-                  selectedIcon:
-                      const Icon(Icons.receipt_long, color: AppColors.caramel),
+                  icon: Icon(
+                    Icons.receipt_long_outlined,
+                    color: _currentIndex == 1
+                        ? AppColors.caramel
+                        : AppColors.muted,
+                  ),
+                  selectedIcon: const Icon(
+                    Icons.receipt_long,
+                    color: AppColors.caramel,
+                  ),
                   label: 'Pedidos',
                 ),
                 NavigationDestination(
-                  icon: Icon(Icons.smart_toy_outlined,
-                      color: _currentIndex == 2 ? AppColors.caramel : AppColors.muted),
-                  selectedIcon: const Icon(Icons.smart_toy, color: AppColors.caramel),
+                  icon: Icon(
+                    Icons.smart_toy_outlined,
+                    color: _currentIndex == 2
+                        ? AppColors.caramel
+                        : AppColors.muted,
+                  ),
+                  selectedIcon: const Icon(
+                    Icons.smart_toy,
+                    color: AppColors.caramel,
+                  ),
                   label: 'Robot',
+                ),
+                NavigationDestination(
+                  icon: Icon(
+                    Icons.chat_bubble_outline,
+                    color: _currentIndex == 3
+                        ? AppColors.caramel
+                        : AppColors.muted,
+                  ),
+                  selectedIcon: const Icon(
+                    Icons.chat_bubble,
+                    color: AppColors.caramel,
+                  ),
+                  label: 'Chat',
                 ),
               ],
             ),
@@ -127,6 +161,8 @@ class _AppShellState extends State<AppShell> {
         return const PedidosScreen(key: ValueKey('pedidos'));
       case 2:
         return const RobotScreen(key: ValueKey('robot'));
+      case 3:
+        return const ChatBotScreen(key: ValueKey('chatbot'));
       default:
         return const SizedBox.shrink();
     }
@@ -147,7 +183,10 @@ class _AppShellState extends State<AppShell> {
                 },
                 style: OutlinedButton.styleFrom(
                   foregroundColor: AppColors.warmGreen,
-                  side: const BorderSide(color: AppColors.warmGreen, width: 1.5),
+                  side: const BorderSide(
+                    color: AppColors.warmGreen,
+                    width: 1.5,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -200,34 +239,43 @@ class _AppShellState extends State<AppShell> {
 
   Widget _buildEmergencyBanner(BuildContext context) {
     return Container(
-      width: double.infinity,
-      padding: EdgeInsets.fromLTRB(20, MediaQuery.of(context).padding.top + 8, 20, 12),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            AppColors.clayRed.withValues(alpha: 0.95),
-            AppColors.clayRed.withValues(alpha: 0.85),
-          ],
-        ),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.warning_amber_rounded, color: Colors.white, size: 20),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              'PARO DE EMERGENCIA ACTIVO — Brazos detenidos',
-              style: GoogleFonts.inter(
-                color: Colors.white,
-                fontSize: 11,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 0.5,
-              ),
+          width: double.infinity,
+          padding: EdgeInsets.fromLTRB(
+            20,
+            MediaQuery.of(context).padding.top + 8,
+            20,
+            12,
+          ),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                AppColors.clayRed.withValues(alpha: 0.95),
+                AppColors.clayRed.withValues(alpha: 0.85),
+              ],
             ),
           ),
-        ],
-      ),
-    )
+          child: Row(
+            children: [
+              const Icon(
+                Icons.warning_amber_rounded,
+                color: Colors.white,
+                size: 20,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  'PARO DE EMERGENCIA ACTIVO — Brazos detenidos',
+                  style: GoogleFonts.inter(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
         .animate()
         .fadeIn(duration: 300.ms)
         .slideY(begin: -1, end: 0, duration: 400.ms, curve: Curves.easeOut)
@@ -246,24 +294,31 @@ class _AppShellState extends State<AppShell> {
           borderRadius: BorderRadius.circular(20),
           side: BorderSide(color: AppColors.clayRed.withValues(alpha: 0.3)),
         ),
-        icon: const Icon(Icons.warning_amber_rounded, color: AppColors.clayRed, size: 48),
+        icon: const Icon(
+          Icons.warning_amber_rounded,
+          color: AppColors.clayRed,
+          size: 48,
+        ),
         title: Text(
           '¿Activar Paro de Emergencia?',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.cream),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(color: AppColors.cream),
           textAlign: TextAlign.center,
         ),
         content: Text(
           'Esto detendrá inmediatamente todos los brazos robóticos. '
           'El café en preparación se interrumpirá.',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.bone),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: AppColors.bone),
           textAlign: TextAlign.center,
         ),
         actionsAlignment: MainAxisAlignment.spaceEvenly,
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
-            child: Text('Cancelar',
-                style: TextStyle(color: AppColors.muted)),
+            child: Text('Cancelar', style: TextStyle(color: AppColors.muted)),
           ),
           ElevatedButton(
             onPressed: () {
