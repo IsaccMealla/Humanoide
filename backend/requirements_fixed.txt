@@ -12,3 +12,4 @@ python-dateutil==2.9.0.post0
 requests==2.34.2
 supabase==2.30.0
 paho-mqtt==2.1.0
+python-multipart==0.0.9
