@@ -6,6 +6,28 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_chroma import Chroma
 from langchain_core.prompts import ChatPromptTemplate
+#cinta
+from langchain.tools import tool
+import requests
+
+@tool
+def controlar_cinta(accion: str) -> str:
+    """
+    Usa esta herramienta para controlar la cinta transportadora.
+    acciones permitidas: 
+    - 'start' (para encenderla o arrancarla)
+    - 'stop' (para apagarla o detenerla)
+    - 'auto' (para ponerla en modo automático con sensores)
+    """
+    # Ajusta esta URL a la IP de tu servidor local
+    url = "http://localhost:8000/api/cinta/control" 
+    try:
+        response = requests.post(url, json={"action": accion})
+        if response.status_code == 200:
+            return f"He cambiado el estado de la cinta con éxito a: {accion}."
+        return "Hubo un error al intentar controlar la cinta."
+    except Exception as e:
+        return f"Error de conexión con la cinta: {str(e)}"
 
 def _load_langchain_factories():
     """Carga factories compatibles con LangChain 0.x y 1.x."""
@@ -136,7 +158,7 @@ def _sanitize_response(text: str) -> str:
 def get_welcome_message() -> str:
     return (
         'Hola, te doy la bienvenida a AppBarista. '
-        'Soy tu chatbot barista y tambien puedo controlar el robot. '
+        'Soy tu chatbot barista y tambien puedo controlar el robot y la cinta transportadora. '
         'Que quieres hacer hoy?'
     )
 

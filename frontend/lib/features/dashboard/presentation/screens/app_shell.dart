@@ -6,6 +6,7 @@ import '../../../../core/theme/app_colors.dart';
 import 'menu_screen.dart';
 import 'pedidos_screen.dart';
 import 'robot_screen.dart';
+import 'cinta_screen.dart';
 import '../../../robot/presentation/screens/chatbot_screen.dart';
 
 /// Shell principal con NavigationBar de 3 pestañas
@@ -126,8 +127,22 @@ class _AppShellState extends State<AppShell> {
                 ),
                 NavigationDestination(
                   icon: Icon(
-                    Icons.chat_bubble_outline,
+                    Icons
+                        .conveyor_belt, // O Icons.settings_input_component si no existe
                     color: _currentIndex == 3
+                        ? AppColors.caramel
+                        : AppColors.muted,
+                  ),
+                  selectedIcon: const Icon(
+                    Icons.conveyor_belt,
+                    color: AppColors.caramel,
+                  ),
+                  label: 'Cinta',
+                ),
+                NavigationDestination(
+                  icon: Icon(
+                    Icons.chat_bubble_outline,
+                    color: _currentIndex == 4
                         ? AppColors.caramel
                         : AppColors.muted,
                   ),
@@ -162,6 +177,8 @@ class _AppShellState extends State<AppShell> {
       case 2:
         return const RobotScreen(key: ValueKey('robot'));
       case 3:
+        return CintaScreen(key: const ValueKey('cinta'));
+      case 4:
         return const ChatBotScreen(key: ValueKey('chatbot'));
       default:
         return const SizedBox.shrink();

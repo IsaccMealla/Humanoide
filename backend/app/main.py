@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import supabase
 from app.routers import agent
+from app.routers import cinta
+
 
 app = FastAPI()
 
@@ -13,8 +15,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(agent.router, prefix="/agent", tags=["agent"])
-
+app.include_router(agent.router, prefix="/api/agent", tags=["agent"])
+app.include_router(cinta.router, prefix="/api/cinta", tags=["Cinta Transportadora"])
 @app.get("/")
 def root():
     return {"message": "Backend running"}
