@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 
+# El prefijo /cinta es vital para que la ruta final sea /api/cinta/...
 router = APIRouter(prefix="/cinta", tags=["Cinta Transportadora"])
 
-# modelo de datos de la cinta
 class CintaState(BaseModel):
     is_running: bool = False
     manual_override: bool = False
@@ -11,12 +11,14 @@ class CintaState(BaseModel):
     sensor_ultra_triggered: bool = False
     last_event: str = "Sistema en espera"
 
-#estado en memoria
 current_state = CintaState()
 
+# Asegúrate de que dice "/status" y no otra cosa
 @router.get("/status")
 def get_status():
     return current_state
+
+# ... (aquí sigue tu código de @router.post("/control"), etc.)
 
 @router.post("/update")
 def update_status(state: CintaState):

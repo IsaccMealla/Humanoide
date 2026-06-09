@@ -16,7 +16,7 @@ app.add_middleware(
 )
 
 app.include_router(agent.router, prefix="/api/agent", tags=["agent"])
-app.include_router(cinta.router, prefix="/api/cinta", tags=["Cinta Transportadora"])
+app.include_router(cinta.router, prefix="/api")
 @app.get("/")
 def root():
     return {"message": "Backend running"}
